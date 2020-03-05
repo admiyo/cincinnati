@@ -4,6 +4,26 @@ use crate::graph::State;
 use actix_web::HttpResponse;
 use failure::Fallible;
 
+/// Landing Page.
+///
+pub async fn landing() -> Fallible<HttpResponse> {
+    let body = "
+<html>
+  <head><title>Graph Status</title></head>
+  <body>
+    <ul>
+      <li><a href=\"liveness\">liveness</a></li>
+      <li><a href=\"metrics\">metrics</a></li>
+      <li><a href=\"readiness\">readiness</a></li>
+    </ul>
+  </body>
+</html>";
+
+    Ok(HttpResponse::Ok()
+       .content_type("text/html; charset=utf-8")
+       .body(body))
+}
+
 /// Expose liveness status.
 ///
 /// Status:

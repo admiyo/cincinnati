@@ -78,6 +78,11 @@ fn main() -> Result<(), Error> {
         App::new()
             .app_data(actix_web::web::Data::new(status_state.clone()))
             .service(
+                actix_web::web::resource("/")
+                    .route(actix_web::web::get().to(status::landing)),
+            )
+
+            .service(
                 actix_web::web::resource("/liveness")
                     .route(actix_web::web::get().to(status::serve_liveness)),
             )
